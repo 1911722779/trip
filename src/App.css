@@ -1,5 +1,30 @@
-.box {
-  width: 750px;
-  height: 200px;
-  background-color: blue;
+/* 通用样式 */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+
+}
+
+.h-screen {
+  /* 使用相对单位vh 1vh = 1% of viewport height */
+  height: 100vh;
+}
+
+.h-all {
+  height: 100%;
+}
+
+.fixed-loading {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
 }

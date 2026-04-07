@@ -1,15 +1,47 @@
-import { useState } from 'react'
 import './App.css'
+import {
+  Suspense,
+  lazy
+} from 'react'
+import {
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom'
+import MainLayout from '@/components/MainLayout'
+import BlankLayout from '@/components/BlankLayout'
 
+
+const Home = lazy(() => import('@/pages/Home'))
+const Search = lazy(() => import('@/pages/Search'))
+const Discount = lazy(() => import('@/pages/Discount'));
+const Collection = lazy(() => import('@/pages/Collection'));
+const Trip = lazy(() => import('@/pages/Trip'));
+const Account = lazy(() => import('@/pages/Account'));
 function App() {
-
   return (
     <>
-      <div style={{ width: '2.66667rem', height: '5rem', backgroundColor: 'red' }}></div>
-      <div style={{ width: '2.66667rem', height: '5rem', backgroundColor: 'yellow' }}></div>
-      <div className="box"></div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {/* 带有 tabbar 的 Layout */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Navigate to="/home"/>} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/discount" element={<Discount />} />
+            <Route path="/collection" element={<Collection />} />
+            <Route path="/trip" element={<Trip />} />
+            <Route path="/account" element={<Account />} />
+          </Route>
+
+          {/* search 不要 tabbar：只在 /search 匹配 BlankLayout */}
+          <Route path="/search" element={<BlankLayout />}>
+            <Route index element={<Search />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   )
 }
+
 
 export default App

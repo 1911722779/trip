@@ -96,3 +96,65 @@
   - 频繁的单位换算
   - 自动化？ 
     - postcss + postcss-pxtorem px换算rem
+    - postcss 是css 预编译器，很强大
+    - vite 会自动读取postcss.config.js 将css 内容编译 px -> rem
+## git 提交规范
+- 项目初始化
+## 功能模块
+- UI 组件库
+  - react-vant 第三方组件库 70%的组件已经有了，不用写
+  - 选择一个适合业务的UI组件库 或者公司内部的组件库 
+- 配置路由及懒加载
+  - 懒加载
+  - 路由守卫
+  - Layout 组件
+    - 嵌套路由Outlet 进行分组路由配置
+    - 网页有几个模板 Layout
+      - Route 不加path 对应的路由自动选择
+      - tabbar 模板
+      - blank 模板
+  - tabbar 导航标签
+    - react-vant + @react-vant/icons
+    - value + onChange 响应式
+    - 直接点击链接分享 active 的设置
+
+- chatbot 模块
+  - llm模块 chat 封装
+  - 迭代chat，支持任意模型 
+## 项目亮点和难点
+- 前端智能
+  - chat函数
+  - 对各家模型进行调试 对chat重构，升级为qwen3.5-plus,kimi2等模型
+    性能、能力、性价比综合考虑
+    随意切换大模型，通过参数抽象
+- 原子css
+  - App.css 里面添加通用样式
+  - 各自模块里有module.css 不影响别的组件
+  - postcss pxtorem 插件 快速还原设计稿
+  - 原子类的css
+    一个元素按功能逻辑拆分成多个类，和原子一样
+    元素的样式就可以由这些原子类组合而成
+    样式基础 样式复用率高 以后几乎可以不用写样式
+## 项目遇到过什么问题，怎么解决的
+- chat messages 遇到message 覆盖问题
+- 闭包陷阱
+  一次事件里面，两次setMessages()
+
+
+- 自定义Hooks
+  - useTitle
+  一定要设置 
+
+- es6 特性使用
+  tabbar 的高亮跟随网址
+  - arr.findIndex
+  - str.startsIth
+  - promise 
+
+- 项目迭代
+  - 功能由浅入深
+  - chatbot qwen 简单chat
+  - qwen-plus 推理模型 
+  - 流式输出
+  - 上下文 LRU
+  - coze 工作流接口调用 

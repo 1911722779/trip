@@ -1,0 +1,82 @@
+.chatArea {
+  overflow-y: auto;
+  padding: 12px;
+  background-color: #ffffff;
+}
+
+.inputArea {
+  padding: 16px;
+  border-top: 1px solid #ddd;
+  background: #ffffff;
+}
+
+.input {
+  margin-right: 8px;
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+  border-color: #7a9eed;
+  box-shadow: 0 0 0 3px rgba(58, 126, 235, 0.25);
+}
+
+/* react-vant 真实 input 在内部，focus 样式加在它上面更稳定 */
+.input:focus-within {
+  border-color: #4277ea;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.btn {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  border: 1px solid #315fde;
+  color: #fff;
+  font-weight: 600;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+  transition: transform 0.06s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.22);
+  filter: brightness(0.98);
+}
+
+/* react-vant disabled：保持同色系，但表现为不可点击 */
+.btn:global(.rv-button--disabled),
+.btn[disabled] {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+  color: #9ca3af;
+  opacity: 1;
+  box-shadow: none;
+  filter: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.messageRight,
+.messageRight {
+  max-width: 70;
+  padding: 8px 12px;
+  margin: 12px 0px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.messageLeft {
+  background-color: #f7f7f7;
+  margin-right: 20%;
+}
+
+.messageRight {
+  background-color: #4fc08d;
+  color: white;
+  margin-left: 30%;
+}
