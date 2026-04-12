@@ -117,16 +117,23 @@
     - react-vant + @react-vant/icons
     - value + onChange 响应式
     - 直接点击链接分享 active 的设置
-
 - chatbot 模块
   - llm模块 chat 封装
   - 迭代chat，支持任意模型 
+- Search 模块
+  - 防抖
+  - api
+    AjaxSuggest GoogleSuggest
+  - localStorage
+  
 ## 项目亮点和难点
 - 前端智能
   - chat函数
   - 对各家模型进行调试 对chat重构，升级为qwen3.5-plus,kimi2等模型
     性能、能力、性价比综合考虑
     随意切换大模型，通过参数抽象
+  - 文本生成图片
+    - 优化prompt 设计
 - 原子css
   - App.css 里面添加通用样式
   - 各自模块里有module.css 不影响别的组件
@@ -135,6 +142,14 @@
     一个元素按功能逻辑拆分成多个类，和原子一样
     元素的样式就可以由这些原子类组合而成
     样式基础 样式复用率高 以后几乎可以不用写样式
+- 用户体验优化
+  - 搜索建议，防抖+uesMemo 性能优化
+  - 组件粒度划分
+    React.memo + useCallback
+  - 懒加载
+  - 热门推荐 + 相关商品 （产品）
+  - SPA Simple Page Application
+  - 骨架屏 不用让用户等待了
 ## 项目遇到过什么问题，怎么解决的
 - chat messages 遇到message 覆盖问题
 - 闭包陷阱
@@ -158,3 +173,10 @@
   - 流式输出
   - 上下文 LRU
   - coze 工作流接口调用 
+
+## 通用组件开发
+- Loading 
+  - 居中方案
+    position:fixed + tlrb=0 + margin  auto
+  - React.memo 无状态组件，不重新渲染
+  - animation

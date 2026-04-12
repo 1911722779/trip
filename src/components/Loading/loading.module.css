@@ -1,0 +1,50 @@
+.wrapper>div {
+  /* 选择子元素 */
+  /* static */
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #d44439;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+  /* 关键帧动画 */
+  /* 
+  animation-name 动画脚本 
+  animation-duration 执行时间
+  animation-iteration-count 执行次数 
+  animation-timing-function 运动速率
+  */
+  animation: loading 1.4s infinite ease-in
+}
+
+.wrapper>div:nth-child(2) {
+  /* background-color: rgb(255, 157, 127); */
+  /* 动画延迟0.7s */
+  animation-delay: -0.7s;
+
+}
+
+@keyframes loading {
+
+  /* 1.4s 要设计多少个动作 */
+  0%,
+  100% {
+    transform: scale(0);
+  }
+
+  25% {
+    background-color: pink;
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    background-color: pink;
+  }
+}

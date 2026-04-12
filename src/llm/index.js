@@ -53,3 +53,12 @@ export const qwenChat = async (messages) => {
   )
   return res;
 }
+
+export const generateAvatar = async (text) => {
+  // 设计prompt
+  const prompt = `
+    你是一个漫画设计师，需要为用户设计头像，主打速写简约的水墨风格
+    用户的信息是${text}
+    要求有个性，有设计感。
+  `
+}

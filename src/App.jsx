@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom'
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
+import Loading from '@/components/Loading';
 
 
 const Home = lazy(() => import('@/pages/Home'))
@@ -18,14 +19,16 @@ const Discount = lazy(() => import('@/pages/Discount'));
 const Collection = lazy(() => import('@/pages/Collection'));
 const Trip = lazy(() => import('@/pages/Trip'));
 const Account = lazy(() => import('@/pages/Account'));
+const Detail = lazy(() => import('@/pages/Detail'));
+
 function App() {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>{<Loading />}</div>}>
         <Routes>
           {/* 带有 tabbar 的 Layout */}
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Navigate to="/home"/>} />
+            <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<Home />} />
             <Route path="/discount" element={<Discount />} />
             <Route path="/collection" element={<Collection />} />
@@ -34,8 +37,9 @@ function App() {
           </Route>
 
           {/* search 不要 tabbar：只在 /search 匹配 BlankLayout */}
-          <Route path="/search" element={<BlankLayout />}>
-            <Route index element={<Search />} />
+          <Route element={<BlankLayout />}>
+            <Route path="/search" element={<Search />} />
+            <Route path="/detail/:id" element={<Detail />} />
           </Route>
         </Routes>
       </Suspense>

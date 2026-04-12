@@ -1,13 +1,24 @@
 .chatArea {
   overflow-y: auto;
+  min-height: 0;
   padding: 12px;
+  /* 96px 给输入框留空 + 50px 给底部 Tabbar 留空 */
+  padding-bottom: calc(146px + env(safe-area-inset-bottom));
   background-color: #ffffff;
 }
 
 .inputArea {
-  padding: 16px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* 避开 MainLayout 底部 Tabbar（约 50px） */
+  bottom: 100px;
+  z-index: 10;
+  padding: 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
   border-top: 1px solid #ddd;
   background: #ffffff;
+  flex-shrink: 0;
 }
 
 .input {
@@ -36,7 +47,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1;
   box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
   transition: transform 0.06s ease, box-shadow 0.15s ease, filter 0.15s ease;
