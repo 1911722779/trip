@@ -1,0 +1,33 @@
+.page {
+  min-height: 100vh;
+  background: #f6f7fb;
+}
+
+.header {
+  padding: 16px 14px 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.title {
+  margin: 0;
+  font-size: 32px;
+  color: #111827;
+}
+
+.subTitle {
+  margin: 8px 0 0;
+  font-size: 22px;
+  color: #6b7280;
+}
+
+.cardsSection {
+  padding: 12px;
+}
+
+.cardsInner {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  padding: 8px 0;
+}

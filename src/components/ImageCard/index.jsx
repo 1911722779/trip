@@ -3,9 +3,12 @@ import {
   useRef,
   useEffect
 } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 const ImageCard = (props) => {
+  const navigate = useNavigate()
   const {
+    id,
     url,
     height,
     scenicName,
@@ -37,8 +40,12 @@ const ImageCard = (props) => {
     if (imgRef.current) observer.observe(imgRef.current);
   }, [])
 
+  const handleGoDetail = () => {
+    navigate(`/detail/${id ?? ''}`)
+  }
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleGoDetail} role="button" tabIndex={0}>
       <div style={{ height: imageHeight }} className={styles.imageWrap}>
         <img ref={imgRef} data-src={url} className={styles.img} />
         {discountTag ? <span className={styles.tag}>{discountTag}</span> : null}

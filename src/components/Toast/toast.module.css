@@ -1,7 +1,9 @@
+/* 水平位置 left 由 Toast/index.jsx 实测 Tabbar 最后一项图标中心（px），避免网页端与 90% 估算偏差 */
 .toastWrapper {
   position: fixed;
-  bottom: 120px;
-  right: 20px;
+  bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+  right: auto;
+  transform: translateX(-50%);
   background-color: #1890ff;
   border-radius: 16px;
   color: white;
@@ -12,18 +14,23 @@
   gap: 24px;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
+  max-width: calc(
+    100vw - 24px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)
+  );
+  min-width: 0;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(-50%) translateY(20px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
@@ -31,15 +38,29 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .toastArrow {
   position: absolute;
   bottom: -12px;
-  right: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-top: 12px solid #1890ff;
+}
+
+@media (max-width: 480px) {
+  .toastWrapper {
+    font-size: 20px;
+    gap: 14px;
+    padding: 12px 16px;
+    max-width: calc(
+      100vw - 16px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)
+    );
+  }
 }

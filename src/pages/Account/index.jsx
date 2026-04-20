@@ -3,6 +3,7 @@ import {
   useRef,
   useState
 } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Image,
   Cell,
@@ -28,8 +29,11 @@ import {
   generateAvatar
 } from '@/llm';
 import SvgSearch from '@react-vant/icons/es/Search';
+import { requireLogin } from '@/utils/authGuard'
 
 const Account = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [userInfo, setUserInfo] = useState({
     nickname: '张三',
     level: '6级',
@@ -41,6 +45,13 @@ const Account = () => {
 
   const [showActionSheet, setShowActionSheet] = useState(false)
   const fileInputRef = useRef(null)
+
+  const guardAction = (action) => {
+    const ok = requireLogin(navigate, location.pathname)
+    if (!ok) return false
+    if (typeof action === 'function') action()
+    return true
+  }
 
   const updateAvatar = (avatar) => {
     setUserInfo((prev) => ({
@@ -108,7 +119,7 @@ const Account = () => {
           height="64px"
           src={userInfo.avatar}
           style={{ cursor: 'pointer' }}
-          onClick={() => setShowActionSheet(true)}
+          onClick={() => guardAction(() => setShowActionSheet(true))}
         />
         <div className="ml4">
           <div className={styles.nickname}>昵称：{userInfo.nickname}</div>
@@ -120,14 +131,14 @@ const Account = () => {
 
       <div className="mt3">
         <CellGroup inset>
-          <Cell title="服务" icon={<ServiceO />} isLink />
+          <Cell title="服务" icon={<ServiceO />} isLink onClick={() => guardAction()} />
         </CellGroup>
         <CellGroup inset className="mt2">
-          <Cell title="收藏" icon={<StarO />} isLink />
-          <Cell title="朋友圈" icon={<FriendsO />} isLink />
+          <Cell title="收藏" icon={<StarO />} isLink onClick={() => guardAction()} />
+          <Cell title="朋友圈" icon={<FriendsO />} isLink onClick={() => guardAction()} />
         </CellGroup>
         <CellGroup inset className="mt2">
-          <Cell title="设置" icon={<SettingO />} isLink />
+          <Cell title="设置" icon={<SettingO />} isLink onClick={() => guardAction()} />
         </CellGroup>
       </div>
       <ActionSheet
@@ -150,7 +161,7 @@ const Account = () => {
       <div className={styles.gridContainer}>
         {
           gridData.map((item, index) => (
-            <div key={index} className={styles.gridItem}>
+            <div key={index} className={styles.gridItem} onClick={() => guardAction()}>
               <div className={styles.icon}>{item.icon}</div>
               <div className={styles.text}>{item.text}</div>
             </div>

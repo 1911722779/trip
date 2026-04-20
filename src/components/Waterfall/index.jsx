@@ -8,6 +8,8 @@ import ImageCard from '@/components/ImageCard';
 
 const Waterfall = (props) => {
   const loader = useRef(null);
+  const fetchMoreRef = useRef(() => Promise.resolve());
+  const isFetchingRef = useRef(false);
 
   const {
     loading,
@@ -15,17 +17,30 @@ const Waterfall = (props) => {
     leftImages = [],
     rightImages = []
   } = props
+
+  useEffect(() => {
+    fetchMoreRef.current = fetchMore
+  }, [fetchMore])
+
   useEffect(() => {
     // ref 出现在视窗了 intersectionObserver
-    const observer = new IntersectionObserver(([entry],obs) => {
-      if (entry.isIntersecting) {
-        fetchMore();
-      }
-      // obs.unobserve(entry.target);
-    })
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (!entry.isIntersecting) return
+        if (isFetchingRef.current) return
+        if (loading) return
+        isFetchingRef.current = true
+        try {
+          await Promise.resolve(fetchMoreRef.current())
+        } finally {
+          isFetchingRef.current = false
+        }
+      },
+      { root: null, rootMargin: '200px 0px', threshold: 0.01 }
+    )
     if (loader.current) observer.observe(loader.current);
     return () => observer.disconnect()
-  }, [])
+  }, [loading])
 
   return (
     <div className={styles.wrapper}>

@@ -22,7 +22,7 @@ const Trip = lazy(() => import('@/pages/Trip'));
 const Account = lazy(() => import('@/pages/Account'));
 const Detail = lazy(() => import('@/pages/Detail'));
 const Coze = lazy(() => import('@/pages/Coze'));
-
+const Login = lazy(() => import('@/pages/Login'));
 function App() {
   return (
     <>
@@ -36,6 +36,7 @@ function App() {
             <Route path="/collection" element={<Collection />} />
             <Route path="/trip" element={<Trip />} />
             <Route path="/account" element={<Account />} />
+
           </Route>
 
           {/* search 不要 tabbar：只在 /search 匹配 BlankLayout */}
@@ -43,8 +44,10 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/detail/:id" element={<Detail />} />
           </Route>
+          <Route path="/login" element={<Login />} />
           <Route path="/coze" element={<Coze />} />
         </Routes>
+
       </Suspense>
       <Toast />
     </>

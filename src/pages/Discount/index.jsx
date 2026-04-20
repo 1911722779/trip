@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Swiper, Image } from 'react-vant'
 import SvgSearch from '@react-vant/icons/es/Search'
@@ -18,11 +18,18 @@ const Discount = () => {
   const [loading, setLoading] = useState(false)
   const [locationText, setLocationText] = useState('上海市浦东新区')
 
+  const pageRef = useRef(1)
+  const loadingRef = useRef(false)
+  const leftHeightRef = useRef(0)
+  const rightHeightRef = useRef(0)
+  const leftImagesRef = useRef([])
+  const rightImagesRef = useRef([])
+
   const appendDiscountItems = (items) => {
-    let nextLeftHeight = leftHeight
-    let nextRightHeight = rightHeight
-    const nextLeft = [...leftImages]
-    const nextRight = [...rightImages]
+    let nextLeftHeight = leftHeightRef.current
+    let nextRightHeight = rightHeightRef.current
+    const nextLeft = [...leftImagesRef.current]
+    const nextRight = [...rightImagesRef.current]
 
     items.forEach((item) => {
       const h = Number(item?.height) || 0
@@ -39,23 +46,33 @@ const Discount = () => {
     setRightImages(nextRight)
     setLeftHeight(nextLeftHeight)
     setRightHeight(nextRightHeight)
+
+    leftImagesRef.current = nextLeft
+    rightImagesRef.current = nextRight
+    leftHeightRef.current = nextLeftHeight
+    rightHeightRef.current = nextRightHeight
   }
 
   const fetchMore = async () => {
-    if (loading) return
+    if (loadingRef.current) return
+    loadingRef.current = true
     setLoading(true)
     try {
-      const res = await getDiscountList(page, 10)
+      const currentPage = pageRef.current
+      const res = await getDiscountList(currentPage, 10)
       const list = res.data || []
       appendDiscountItems(list)
       if (list.length > 0) {
-        setPage((prev) => prev + 1)
-        if (page === 1 && list[0]?.city) {
+        const nextPage = currentPage + 1
+        pageRef.current = nextPage
+        setPage(nextPage)
+        if (currentPage === 1 && list[0]?.city) {
           setLocationText(`${list[0].city}市热门景区`)
         }
       }
     } finally {
       setLoading(false)
+      loadingRef.current = false
     }
   }
 
@@ -69,6 +86,7 @@ const Discount = () => {
       const firstList = listRes.data || []
       setBanners(bannerList)
       appendDiscountItems(firstList)
+      pageRef.current = 2
       setPage(2)
       if (firstList[0]?.city) {
         setLocationText(`${firstList[0].city}市热门景区`)
