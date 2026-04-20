@@ -125,6 +125,16 @@
   - api
     AjaxSuggest GoogleSuggest
   - localStorage
+- toast 组件封装
+  - 需要自定义，UI组件库不满足需求
+  - UI props
+  - JS 显示出来 跨层级通信
+    观察者
+  - mitt eventBus 事件总线 
+    - 实例化 mitt()
+    - .on(自定义事件的名字，callback)
+    - emit(自定义事件的名字，参数)
+    组件通过监听一个自定义事件，实现基于事件的组件通信
   
 ## 项目亮点和难点
 - 前端智能
@@ -150,11 +160,30 @@
   - 热门推荐 + 相关商品 （产品）
   - SPA Simple Page Application
   - 骨架屏 不用让用户等待了
+  - 智能识别图片，围绕图片内容进行形成安排
+    - 产品
+      国内热门景点的旅程安排
+    - 商业价值
+      接入高德地图api 
+      coze工作流 智能编排AI 流程
+    - api调用
+    - 插件
+      图片里接插件 计算机视觉
+      - 大模型 关键词
+      prompt
+  - workflow_id=7628544541594877979
+  - token 
+
+  - 设计工作流
+    - 创建工作流 trip_pic
+      上传景点图片（非必选）通过景点照片生成相关旅游路线
+    - 代码节点
+      参数校验和逻辑功能，返回运行的结果
+
 ## 项目遇到过什么问题，怎么解决的
 - chat messages 遇到message 覆盖问题
 - 闭包陷阱
   一次事件里面，两次setMessages()
-
 
 - 自定义Hooks
   - useTitle

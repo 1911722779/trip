@@ -33,7 +33,7 @@ const Account = () => {
   const [userInfo, setUserInfo] = useState({
     nickname: '张三',
     level: '6级',
-    slogan: '令令令申申申申申，不要学计算机',
+    slogan: '令令令申申申申申，不要熬夜',
     avatar: 'https://img.yzcdn.cn/vant/cat.jpeg',
 
   })

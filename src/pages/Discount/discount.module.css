@@ -1,0 +1,146 @@
+.page {
+  min-height: 100vh;
+  padding: 14px 12px 24px;
+  background: #f6f7fb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.searchBar {
+  height: 72px;
+  border-radius: 14px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.searchWrap {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  border-radius: 28px;
+  background: #f6f7fb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 0 16px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  view-transition-name: shared-search-bar;
+}
+
+.searchIcon {
+  display: inline-flex;
+  align-items: center;
+  color: #9ca3af;
+}
+
+.searchIcon :global(svg) {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.searchInput {
+  flex: 1;
+  font-size: 28px;
+  color: #9ca3af;
+}
+
+.locationBar {
+  height: 84px;
+  border-radius: 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.locationLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.locationDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1989fa;
+  box-shadow: 0 0 0 4px rgba(25, 137, 250, 0.14);
+}
+
+.locationText {
+  font-size: 34px;
+  font-weight: 500;
+  color: #303133;
+}
+
+.locationAction {
+  border: 0;
+  background: #1989fa;
+  color: #ffffff;
+  border-radius: 16px;
+  height: 52px;
+  padding: 0 20px;
+  font-size: 28px;
+}
+
+.banner {
+  width: calc(100% - 32px);
+  margin: 0 auto;
+  height: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(255, 138, 101, 0.35);
+}
+
+.banner :global(.rv-swiper) {
+  height: 100%;
+}
+
+.banner :global(.rv-swiper__track),
+.banner :global(.rv-swiper__item),
+.banner :global(.rv-image),
+.banner :global(.rv-image__img) {
+  height: 100%;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.zoneHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.zoneTitle {
+  margin: 0;
+  font-size: 36px;
+  color: #111827;
+}
+
+.zoneSubTitle {
+  font-size: 28px;
+  color: #6b7280;
+}
+
+.zone :global(.rv-loading) {
+  margin-top: 8px;
+}

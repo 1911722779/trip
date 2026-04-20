@@ -8,9 +8,10 @@ import {
   Route,
   Navigate
 } from 'react-router-dom'
-import MainLayout from '@/components/MainLayout'
-import BlankLayout from '@/components/BlankLayout'
+import MainLayout from '@/components/MainLayout';
+import BlankLayout from '@/components/BlankLayout';
 import Loading from '@/components/Loading';
+import Toast from '@/components/Toast';
 
 
 const Home = lazy(() => import('@/pages/Home'))
@@ -20,6 +21,7 @@ const Collection = lazy(() => import('@/pages/Collection'));
 const Trip = lazy(() => import('@/pages/Trip'));
 const Account = lazy(() => import('@/pages/Account'));
 const Detail = lazy(() => import('@/pages/Detail'));
+const Coze = lazy(() => import('@/pages/Coze'));
 
 function App() {
   return (
@@ -41,8 +43,10 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/detail/:id" element={<Detail />} />
           </Route>
+          <Route path="/coze" element={<Coze />} />
         </Routes>
       </Suspense>
+      <Toast />
     </>
   )
 }

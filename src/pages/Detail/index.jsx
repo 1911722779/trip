@@ -3,7 +3,9 @@ import {
 } from 'react-router-dom';
 import {
   useEffect,
-  memo
+  memo,
+  useMemo,
+  useState
 } from 'react';
 import useDetailStore from '@/store/useDetailStore';
 import {
@@ -21,10 +23,12 @@ import {
   ShopO,
   StarO,
 } from '@react-vant/icons';
+import SvgSearch from '@react-vant/icons/es/Search';
 import {
   Swiper,
   Image
 } from 'react-vant';
+import { debounce } from '@/utils';
 
 const BottomBar = memo(() => {
   return (
@@ -54,6 +58,20 @@ const BottomBar = memo(() => {
 const Detail = () => {
   const { id } = useParams();
   const { loading, detail, setDetail } = useDetailStore();
+  const [query, setQuery] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const showSearchBtn = query.trim().length > 0;
+
+  const handleQueryDebounce = useMemo(() => {
+    return debounce((value) => {
+      setSearchKeyword(value.trim());
+    }, 300);
+  }, []);
+
+  useEffect(() => {
+    handleQueryDebounce(query);
+  }, [query, handleQueryDebounce]);
+
   useEffect(() => {
     useTitle(detail?.title);
   }, [detail])
@@ -67,10 +85,31 @@ const Detail = () => {
     <div>
       <nav className={styles.nav}>
         <ArrowLeft fontSize={28} />
+        <div className={styles.searchWrap}>
+          <SvgSearch className={styles.searchIcon} />
+          <input
+            className={styles.searchInput}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="搜索商品关键词"
+          />
+          {showSearchBtn ? (
+            <button
+              type="button"
+              className={styles.searchBtn}
+              onClick={() => setSearchKeyword(query.trim())}
+            >
+              搜索
+            </button>
+          ) : null}
+        </div>
         <Cart fontSize={28} />
       </nav>
       {/* 图片轮播 幻灯片 */}
       <div className={styles.container}>
+        {searchKeyword ? (
+          <div className={styles.searchTip}>当前搜索关键词：{searchKeyword}</div>
+        ) : null}
         <Swiper>
           {
             detail.images.map((item, index) => (
